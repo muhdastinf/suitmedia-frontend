@@ -4,9 +4,9 @@ import { IPost } from "@/types/post.type";
 
 const PostList = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [sort, setSort] = useState(() => localStorage.getItem("sort") || "-published_at");
-  const [pageSize, setPageSize] = useState(() => parseInt(localStorage.getItem("pageSize") || "10"));
-  const [pageNumber, setPageNumber] = useState(() => parseInt(localStorage.getItem("pageNumber") || "1"));
+  const [sort, setSort] = useState("-published_at");
+  const [pageSize, setPageSize] = useState(10);
+  const [pageNumber, setPageNumber] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const totalPages = Math.ceil(totalItems / pageSize);
 
@@ -23,13 +23,10 @@ const PostList = () => {
       }
     );
     setPosts(response.data.data);
-    setTotalItems(response.data.meta.total);
+    setTotalItems(100);
   };
 
   useEffect(() => {
-    localStorage.setItem("sort", sort);
-    localStorage.setItem("pageSize", pageSize.toString());
-    localStorage.setItem("pageNumber", pageNumber.toString());
     fetchPosts();
   }, [sort, pageSize, pageNumber]);
 
@@ -40,6 +37,8 @@ const PostList = () => {
   const handleNext = () => {
     setPageNumber(Math.min(totalPages, pageNumber + 1));
   };
+
+  console.log("posts", posts);
 
   return (
     <div className="p-6">
@@ -71,8 +70,8 @@ const PostList = () => {
         {posts.map((post) => (
           <div key={post.id} className="border p-2 rounded-lg shadow-lg">
             <img
-              src={post.small_image[0]?.url}
-              alt={post.small_image[0]?.file_name}
+              src={post.small_image[0].url}
+              alt={post.small_image[0].file_name}
               loading="lazy"
               className="w-full h-52 object-cover rounded-t-md"
             />
@@ -84,7 +83,7 @@ const PostList = () => {
                   year: "numeric",
                 })}
               </p>
-              <h2 className="text-lg font-semibold line-clamp-3">
+              <h2 className=" text-lg font-semibold line-clamp-3">
                 {post.title}
               </h2>
             </div>

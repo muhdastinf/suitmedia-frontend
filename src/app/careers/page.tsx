@@ -9,7 +9,7 @@ export default function Home() {
       <Header />
       <div className="flex justify-center items-center h-lvh flex-col">
         <h1 className="font-bold text-2xl">Welcome to Careers Page</h1>
-        <h1 className="font-semibold text-lg text-gray-400">Click "Ideas" to see all ideas</h1>
+        <h1 className="font-semibold text-lg text-gray-400">Click Ideas to see all ideas</h1>
       </div>
     </div>
   );

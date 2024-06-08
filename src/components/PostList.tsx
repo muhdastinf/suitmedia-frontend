@@ -70,8 +70,8 @@ const PostList = () => {
         {posts.map((post) => (
           <div key={post.id} className="border p-2 rounded-lg shadow-lg">
             <img
-              src={post.small_image[0].url}
-              alt={post.small_image[0].file_name}
+              src={post.small_image[0]?.url}
+              alt={post.small_image[0]?.file_name}
               loading="lazy"
               className="w-full h-52 object-cover rounded-t-md"
             />
